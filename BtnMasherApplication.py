@@ -65,7 +65,7 @@ raw input ??
 
 i=0
 try:
-    sleep(6000)         # wait 300 seconds  ## DEFINE THE TIME OF SIMULATION
+    sleep(300)         # wait 300 seconds  ## DEFINE THE TIME OF SIMULATION
     print "Time's up. Finished!"  
 except KeyboardInterrupt:
     GPIO.cleanup()
