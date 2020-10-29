@@ -1,0 +1,10 @@
+
+2020-10-29 13:54:46,184 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': False, 'Btn2_Pressed': True}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 10, 29, 12, 54, 46, 184072), 'measurement': 'NewResponse'}]
+
+2020-10-29 13:54:47,962 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': True, 'Btn2_Pressed': False}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 10, 29, 12, 54, 47, 962686), 'measurement': 'NewResponse'}]
+
+2020-10-29 13:54:49,393 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': False, 'Btn2_Pressed': True}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 10, 29, 12, 54, 49, 393203), 'measurement': 'NewResponse'}]
+
+2020-10-29 13:54:50,353 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': True, 'Btn2_Pressed': False}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 10, 29, 12, 54, 50, 352939), 'measurement': 'NewResponse'}]
+
+2020-10-29 13:54:50,873 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': False, 'Btn2_Pressed': True}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 10, 29, 12, 54, 50, 873442), 'measurement': 'NewResponse'}]
