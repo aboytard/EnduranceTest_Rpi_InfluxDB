@@ -3,6 +3,9 @@
 In this Repo, we are detecting the Btn Pressed in order to use it in the RET.
 
 The main method that is used is called  BtnMasherApplication.py and is calling the other small module.
+```
+sudo python BtnMasherApplication.py
+```
 
 The function is able to detect the Btn pressed and write the button where pressed in InfluxDB meanwhile a logfile is generated in case any issue happens.
 
