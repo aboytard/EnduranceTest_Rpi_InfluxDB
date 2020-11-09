@@ -14,7 +14,7 @@ The function is able to detect the Btn pressed and write the button where presse
 
 For now, the only thing that is logged into the logfile is the info that is written in InfluxDB: but we can add some warning and error for postprocessing (for instance, when a btn is pressed two time in a raw this could be a warning). 
 
-# With the databases log
+# Start Influxdb
 In a new terminal:
 
 start influx
@@ -28,4 +28,25 @@ start telegraf:
 
 go into the influx command line interface:
 ```influx```
+
+# Once in the influxdb interface
+A database has one or more series. Each serie is a time-rodered of value/timestamp pais that shares a measurement, tag-set and field-key
+
+show the databases:
+```show databases```
+
+Use the databases of our choise
+```show *Name of the databases*```
+
+Vizualise the information
+Show the measurements:
+```show measurements```
+
+Show the field keys:
+```show FIELD KEYS```
+
+Select information:
+```select *field keys name* from *measurements*```
+
+
 
