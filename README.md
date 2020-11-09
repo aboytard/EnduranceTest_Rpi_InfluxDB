@@ -19,10 +19,13 @@ In a new terminal:
 
 start influx
 ```sudo systemctl start influxdb```
+
 start telegraf:
 ```sudo systemctl start telegraf```
+
  just using influxdb for now but might be useful for looking deeper in the data afterwards
 ```sudo systemctl start chronograf```
+
 go into the influx command line interface:
 ```influx```
 
