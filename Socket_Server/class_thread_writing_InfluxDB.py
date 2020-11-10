@@ -1,24 +1,11 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 29 10:07:46 2020
+Created on Mon Nov  9 12:50:27 2020
 
 @author: ubuntu
 """
 
-### Module to set the data we want to write in InfluxDB and in the logfile
-
-from influxdb import InfluxDBClient
-import datetime
-import BtnDefinition
-'''
-From BtnDefinition I find which Port I am using and how to use them afterwards
-'''
-
-###
-'''
-creation of the DB
-'''
 def write_into_db():
     client=InfluxDBClient(host="localhost",port="8086")
     client.create_database('BtnMasherApplication_DB_Test') ## Always writing in the same DB for now
@@ -48,7 +35,7 @@ def json_body_define(PushBtn_Port): # Add a parameter in order to change the nam
             {
                 "measurement": "Test",
                 "tags": {
-                    "requestName": "Btn1_Pressed_Time",
+                    "requestName": "Btn2_Pressed_Time",
                     "requestType": "GET"
                 },
                 "time":datetime.datetime.utcnow(),
@@ -62,10 +49,3 @@ def json_body_define(PushBtn_Port): # Add a parameter in order to change the nam
 
 def write_data(data,client):
     client.write_points(data)
-
-#json_body = json_body_define(NameFunctionCalling)
-#client.write_points(json_body)
-#results=client.query('SELECT * FROM NewResponse')
-#login_points=list(results.get_points(measurement='NewResponse',tags={"requestName": "Login"}))
-#print(login_points)    
-

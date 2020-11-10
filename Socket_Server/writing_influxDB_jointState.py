@@ -10,10 +10,6 @@ Created on Thu Oct 29 10:07:46 2020
 
 from influxdb import InfluxDBClient
 import datetime
-import BtnDefinition
-'''
-From BtnDefinition I find which Port I am using and how to use them afterwards
-'''
 
 ###
 '''
@@ -27,38 +23,30 @@ def write_into_db():
     return client
 
 
-def json_body_define(PushBtn_Port): # Add a parameter in order to change the name of the measurement for different test
-    if PushBtn_Port == BtnDefinition.PushBtn1_Port:
-        json_body = [
+
+
+def split_socketmsg_into_jsonbody(msg):
+    list_msg = msg.split(";")
+    json_body_jointState = [
             {
-                "measurement": "Test",
+                "measurement": "JointState",
                 "tags": {
-                    "requestName": "Btn1_Pressed_Time",
+                    "requestName": "JointState",
                     "requestType": "GET"
                 },
                 "time":datetime.datetime.utcnow(),
                  "fields": {
-                    "Btn1_Pressed": True,
-                    "Btn2_Pressed": False
+                    "Joint1": list_msg[0],
+                    "Joint2": list_msg[1],
+                    "Joint3": list_msg[2],
+                    "Joint4": list_msg[3],
+                    "Joint5": list_msg[4],
+                    "Joint6": list_msg[5]
                             }
             }
         ]
-    if PushBtn_Port == BtnDefinition.PushBtn2_Port:       
-        json_body = [
-            {
-                "measurement": "Test",
-                "tags": {
-                    "requestName": "Btn1_Pressed_Time",
-                    "requestType": "GET"
-                },
-                "time":datetime.datetime.utcnow(),
-                 "fields": {
-                    "Btn1_Pressed": False,
-                    "Btn2_Pressed": True
-                            }
-            }
-        ]
-    return json_body
+    return json_body_jointState
+
 
 def write_data(data,client):
     client.write_points(data)
