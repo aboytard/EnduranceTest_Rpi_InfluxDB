@@ -39,8 +39,8 @@ def my_callback_Btn1(channel):
     
     
     
-def my_callback_Btn2(channel):  
-    print "BTN2"  
+def my_callback_Btn2(channel): 
+    print "BTN2" 
     """Call a function in the writing_json_body module that adapt with data we want to write in the DB"""
     writing_influxDB.write_data(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port),client)
     """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
@@ -51,8 +51,8 @@ def my_callback_Btn2(channel):
 
 
         
-GPIO.add_event_detect(BtnDefinition.PushBtn1_Port, GPIO.BOTH, callback=my_callback_Btn1, bouncetime = 300) 
-GPIO.add_event_detect(BtnDefinition.PushBtn2_Port, GPIO.BOTH, callback=my_callback_Btn2, bouncetime = 300)
+GPIO.add_event_detect(BtnDefinition.PushBtn1_Port, GPIO.BOTH, callback=my_callback_Btn1, bouncetime = 2000) 
+GPIO.add_event_detect(BtnDefinition.PushBtn2_Port, GPIO.BOTH, callback=my_callback_Btn2, bouncetime = 2000)
 
 
 

@@ -19,7 +19,6 @@ def compare_time():
     if (time_t1_plus_delta_t - time_t1 > 0 and time_t1_plus_delta_t - time_t2 <0):
         print ('Btn was well pressed by the robot')
     else:
-        #        print('There is an issue')
         print('write into database error driver')
     pass
 
