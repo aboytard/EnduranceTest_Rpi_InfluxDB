@@ -11,6 +11,7 @@ Created on Thu Oct 29 10:07:46 2020
 from influxdb import InfluxDBClient
 import datetime
 import BtnDefinition
+import time
 '''
 From BtnDefinition I find which Port I am using and how to use them afterwards
 '''
@@ -36,7 +37,7 @@ def json_body_define(PushBtn_Port): # Add a parameter in order to change the nam
                     "requestName": "Btn1_Pressed_Time",
                     "requestType": "GET"
                 },
-                "time":datetime.datetime.utcnow(),
+                "time":str(datetime.datetime.utcnow()),
                  "fields": {
                     "Btn1_Pressed": True,
                     "Btn2_Pressed": False

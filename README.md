@@ -48,5 +48,8 @@ Show the field keys:
 Select information:
 ```select *field keys name* from *measurements*```
 
+Having the right time printed in a readable way: (when you start a influx terminal)
+```precision rfc3339```
+
 
 

@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
@@ -12,12 +13,18 @@ import RPi.GPIO as GPIO
 import csv
 import class_thread_client
 import writing_influxDB_jointState
+import writing_influxDB_BtnMasher_robot
+
+
+''' Importing a module from another folder'''
+sys.path.append('/home/ubuntu/Repo_BtnMasher_Rpi')
+
 
 ## def run():
     ################# Step 0 #####################
 # Initiialize the servor - Setup the socket :
-HOST = '172.21.19.109'
-PORT = 50000
+HOST = '10.0.1.12'
+PORT = 5000
 mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     mySocket.bind((HOST, PORT))
@@ -39,7 +46,11 @@ while 1:
     ###########################################
     ######### Step 2 #########################
     # Creation of the database we want to write in in influxDB
-    client_db = writing_influxDB_jointState.write_into_db()
+    
+    ##client_db = writing_influxDB_jointState.write_into_db() ## if we want to deal with the jointState
+    ## with fewer information
+    client_db=writing_influxDB_BtnMasher_robot.write_into_db()
+    
     ###########################################
     ########## Step 3 #########################
     # Creation of a thread to deal with the connection (enable the client to end the connection):
@@ -52,12 +63,21 @@ while 1:
     ###########################################
     ######### Step 1 #########################
     # Creation of the database we want to write in in influxDB
-    client_db = writing_influxDB_jointState.write_into_db()
+#    client_db = writing_influxDB_jointState.write_into_db()
+    client_db = writing_influxDB_BtnMasher_robot.write_into_db()
     ###########################################
 
     ###########################################
-    ######### Step 4 #########################
-    # Creation of a thread that deal with the BtnMasherApplication
+    
+        ###########################################
+    ######### Step 2 #########################
+    # Launch the BtnMasherApplication
+    import BtnMasherApplication
+    ###########################################
+
+    ###########################################
+    ######### Step 3 #########################
+    # Creation of a real-time analysor
     
     ###########################################
     ######### Step 5 ##########################
@@ -66,10 +86,10 @@ while 1:
 
     ###########################################
     
-    # Mémorize connection in dictionnary 
+    # Memorize connection in dictionnary 
     it = th_Client.getName()        # id of thread
     th_Client.conn_client[it] = connexion
-    print "Client %s connecté, adresse IP %s, port %s." %\
+    print "Client %s connected, adresse IP %s, port %s." %\
            (it, adresse[0], adresse[1])
     # Dialogue avec le client :
     connexion.send("You are connected. Send your message.")

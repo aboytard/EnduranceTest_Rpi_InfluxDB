@@ -8,6 +8,7 @@ Created on Thu Oct 29 09:45:50 2020
 
 import RPi.GPIO as GPIO
 from time import sleep  
+import time
 
 
 '''Import the module to have the Btn Definition'''
@@ -20,6 +21,9 @@ Logger_BtnMasherApplication.logger.addHandler(Logger_BtnMasherApplication.file_h
 """Create the DB and see how we want to print the data"""
 import writing_influxDB
 client=writing_influxDB.write_into_db()
+
+''' Import the time_relativ_use'''
+import time_relativ_use
  
 def my_callback_Btn1(channel):                
     print "Btn1"
@@ -27,6 +31,7 @@ def my_callback_Btn1(channel):
     writing_influxDB.write_data(writing_influxDB.json_body_define(BtnDefinition.PushBtn1_Port),client)
     """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
     Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn1_Port))
+    time_relativ_use.time_t1_plus_delta_t = time.time()
 
     
     
@@ -36,6 +41,9 @@ def my_callback_Btn2(channel):
     writing_influxDB.write_data(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port),client)
     """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
     Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port))
+    time_relativ_use.time_t1_plus_delta_t = time.time()
+
+
         
 GPIO.add_event_detect(BtnDefinition.PushBtn1_Port, GPIO.BOTH, callback=my_callback_Btn1, bouncetime = 500) 
 GPIO.add_event_detect(BtnDefinition.PushBtn2_Port, GPIO.BOTH, callback=my_callback_Btn2, bouncetime = 500)
@@ -46,6 +54,7 @@ GPIO.add_event_detect(BtnDefinition.PushBtn2_Port, GPIO.BOTH, callback=my_callba
 add variable time of simulation
 raw input ??
 """
+
 try:  
     sleep(300)         # wait 300 seconds  ## DEFINE THE TIME OF SIMULATION
     print "Time's up. Finished!"  
@@ -53,4 +62,4 @@ except KeyboardInterrupt:
     GPIO.cleanup()
 finally:                   # this block will run no matter how the try block exits  
     GPIO.cleanup()         # clean up after yourself  
-    
+        

@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 29 10:07:46 2020
+Created on Thu Nov 12 18:49:31 2020
 
 @author: ubuntu
 """
@@ -11,6 +11,7 @@ Created on Thu Oct 29 10:07:46 2020
 from influxdb import InfluxDBClient
 import datetime
 import class_thread_client
+from dateutil.parser import parse
 
 ###
 '''
@@ -33,19 +34,15 @@ def split_socketmsg_into_jsonbody(message):
     '''I need to reconvert the str(datetime) into datetime without loosing information    '''
     json_body_jointState = [
             {
-                "measurement": "JointState",
+                "measurement": "Btn_Masher_robot",
                 "tags": {
-                    "requestName": "JointState",
+                    "requestName": "Btn_State",
                     "requestType": "GET"
                 },
                 "time":list_msg[0],
                  "fields": {
-                    "Joint1": list_msg[1],
-                    "Joint2": list_msg[2],
-                    "Joint3": list_msg[3],
-                    "Joint4": list_msg[4],
-                    "Joint5": list_msg[5],
-                    "Joint6": list_msg[6]
+                    "Btn_name": list_msg[1],
+                    "Btn_State": list_msg[2]
                             }
             }
         ]
@@ -60,4 +57,3 @@ def write_data(data,client):
 #results=client.query('SELECT * FROM NewResponse')
 #login_points=list(results.get_points(measurement='NewResponse',tags={"requestName": "Login"}))
 #print(login_points)    
-
