@@ -43,11 +43,11 @@ class ThreadClient(threading.Thread):
                 if list_msg[2]=='untouched':
                     time_relativ_use.time_t2 = time.time()
                     time_relativ_use.compare_time()
-                print(list_msg)
-                writing_influxDB_BtnMasher_robot.write_data(message,self.client_db)
+                #print(list_msg)
+                #writing_influxDB_BtnMasher_robot.write_data(message,self.client_db)
             except:
                 ## if we are not having the msg of the jointstate, it is because we are receiving the timeReference
-                print("solve issue")
+                #print("solve issue")
                 pass
             ## add if I want to deal with a time relativ
 #                print("okidoki?")

@@ -15,7 +15,7 @@ GPIO.setmode(GPIO.BOARD)     # set up BOARD GPIO numbering
 add raw input?
 '''
 PushBtn1_Port = 19
-PushBtn2_Port = 31
+PushBtn2_Port = 29
 
 GPIO.setup(PushBtn1_Port, GPIO.IN)
 GPIO.setup(PushBtn2_Port, GPIO.IN)
