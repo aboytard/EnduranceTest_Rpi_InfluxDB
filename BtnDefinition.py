@@ -19,3 +19,6 @@ PushBtn2_Port = 31
 
 GPIO.setup(PushBtn1_Port, GPIO.IN)
 GPIO.setup(PushBtn2_Port, GPIO.IN)
+
+bool_send_msg_Btn1State = False
+bool_send_msg_Btn2State = False

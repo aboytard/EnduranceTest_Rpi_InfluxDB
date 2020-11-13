@@ -12,19 +12,21 @@ from datetime import datetime
 import RPi.GPIO as GPIO
 import csv
 import class_thread_client
+import class_thread_emission
 import writing_influxDB_jointState
 import writing_influxDB_BtnMasher_robot
 
 
 ''' Importing a module from another folder'''
 sys.path.append('/home/ubuntu/Repo_BtnMasher_Rpi')
+import BtnDefinition
 
 
 ## def run():
     ################# Step 0 #####################
 # Initiialize the servor - Setup the socket :
 HOST = '10.0.1.12'
-PORT = 5000
+PORT = 50000
 mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     mySocket.bind((HOST, PORT))
@@ -43,6 +45,7 @@ while 1:
     # Accept the connection of client
     connexion, adresse = mySocket.accept()
     ####################################################
+    
     ###########################################
     ######### Step 2 #########################
     # Creation of the database we want to write in in influxDB
@@ -57,8 +60,24 @@ while 1:
     # This thread is also listening to the client
     conn_client = {}  
     th_Client = class_thread_client.ThreadClient(connexion,conn_client,client_db)
+    th_E = class_thread_emission.Thread_Send_BtnState(connexion,"Btn1","Btn2")
     ## The client is also writing the jointState in InfluxDb
     th_Client.start()
+    th_E.start()
+    
+    # Memorize connection in dictionnary 
+    it = th_Client.getName()        # id of thread
+    th_Client.conn_client[it] = connexion
+    print "Client %s connected, adresse IP %s, port %s." %\
+    (it, adresse[0], adresse[1])
+    # Dialogue avec le client :
+    connexion.send("You are connected. Send your message.")
+    ###########################################
+    ###########################################
+    ########## Step 4 #########################
+    # Creation of a thread to send the data from the BtnMasherApplication to the computer
+    # This thread is also listening to the client
+    conn_client = {}  
 
     ###########################################
     ######### Step 1 #########################
@@ -75,6 +94,7 @@ while 1:
     import BtnMasherApplication
     ###########################################
 
+
     ###########################################
     ######### Step 3 #########################
     # Creation of a real-time analysor
@@ -86,10 +106,7 @@ while 1:
 
     ###########################################
     
-    # Memorize connection in dictionnary 
-    it = th_Client.getName()        # id of thread
-    th_Client.conn_client[it] = connexion
-    print "Client %s connected, adresse IP %s, port %s." %\
-           (it, adresse[0], adresse[1])
-    # Dialogue avec le client :
-    connexion.send("You are connected. Send your message.")
+
+#
+#    th_Client.stop()
+#    th_E.stop()

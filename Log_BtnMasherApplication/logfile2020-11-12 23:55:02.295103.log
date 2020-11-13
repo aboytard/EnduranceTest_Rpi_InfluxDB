@@ -1,0 +1,2 @@
+
+2020-11-13 00:55:04,015 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': False, 'Btn2_Pressed': True}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 11, 12, 23, 55, 4, 15595), 'measurement': 'Test'}]

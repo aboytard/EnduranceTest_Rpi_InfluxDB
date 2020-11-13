@@ -9,7 +9,7 @@ Created on Thu Oct 29 09:45:50 2020
 import RPi.GPIO as GPIO
 from time import sleep  
 import time
-
+import sys
 
 '''Import the module to have the Btn Definition'''
 import BtnDefinition 
@@ -24,6 +24,9 @@ client=writing_influxDB.write_into_db()
 
 ''' Import the time_relativ_use'''
 import time_relativ_use
+
+'''Use the thread defined in the socket.server.main'''
+
  
 def my_callback_Btn1(channel):                
     print "Btn1"
@@ -32,7 +35,8 @@ def my_callback_Btn1(channel):
     """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
     Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn1_Port))
     time_relativ_use.time_t1_plus_delta_t = time.time()
-
+    BtnDefinition.bool_send_msg_Btn1State = True
+    
     
     
 def my_callback_Btn2(channel):  
@@ -42,6 +46,8 @@ def my_callback_Btn2(channel):
     """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
     Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port))
     time_relativ_use.time_t1_plus_delta_t = time.time()
+    BtnDefinition.bool_send_msg_Btn2State = True
+    
 
 
         
@@ -55,7 +61,8 @@ add variable time of simulation
 raw input ??
 """
 
-try:  
+i=0
+try:
     sleep(300)         # wait 300 seconds  ## DEFINE THE TIME OF SIMULATION
     print "Time's up. Finished!"  
 except KeyboardInterrupt:

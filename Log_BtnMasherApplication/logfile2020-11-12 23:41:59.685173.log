@@ -1,0 +1,6 @@
+
+2020-11-13 00:42:07,623 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': False, 'Btn2_Pressed': True}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 11, 12, 23, 42, 7, 623196), 'measurement': 'Test'}]
+
+2020-11-13 00:42:14,639 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': True, 'Btn2_Pressed': False}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': '2020-11-12 23:42:14.639685', 'measurement': 'Test'}]
+
+2020-11-13 00:42:24,134 : INFO : Logger_BtnMasherApplication : [{'fields': {'Btn1_Pressed': False, 'Btn2_Pressed': True}, 'tags': {'requestType': 'GET', 'requestName': 'Btn1_Pressed_Time'}, 'time': datetime.datetime(2020, 11, 12, 23, 42, 24, 134019), 'measurement': 'Test'}]
