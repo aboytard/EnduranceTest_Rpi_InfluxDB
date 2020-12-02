@@ -9,6 +9,7 @@ Created on Thu Oct 29 09:45:50 2020
 import RPi.GPIO as GPIO
 from time import sleep  
 import time
+import datetime
 import sys
 
 '''Import the module to have the Btn Definition'''
@@ -34,7 +35,7 @@ def my_callback_Btn1(channel):
     writing_influxDB.write_data(writing_influxDB.json_body_define(BtnDefinition.PushBtn1_Port),client)
     """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
     Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn1_Port))
-    time_relativ_use.time_t1_plus_delta_t = time.time()
+    time_relativ_use.time_t1_plus_delta_t = datetime.datetime.utcnow()
     BtnDefinition.bool_send_msg_Btn1State = True
     
     
@@ -45,14 +46,14 @@ def my_callback_Btn2(channel):
     writing_influxDB.write_data(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port),client)
     """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
     Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port))
-    time_relativ_use.time_t1_plus_delta_t = time.time()
+    time_relativ_use.time_t1_plus_delta_t = datetime.datetime.utcnow()
     BtnDefinition.bool_send_msg_Btn2State = True
     
 
 
         
-GPIO.add_event_detect(BtnDefinition.PushBtn1_Port, GPIO.BOTH, callback=my_callback_Btn1, bouncetime = 2000) 
-GPIO.add_event_detect(BtnDefinition.PushBtn2_Port, GPIO.BOTH, callback=my_callback_Btn2, bouncetime = 2000)
+GPIO.add_event_detect(BtnDefinition.PushBtn1_Port, GPIO.BOTH, callback=my_callback_Btn1, bouncetime = 500) 
+GPIO.add_event_detect(BtnDefinition.PushBtn2_Port, GPIO.BOTH, callback=my_callback_Btn2, bouncetime = 500)
 
 
 

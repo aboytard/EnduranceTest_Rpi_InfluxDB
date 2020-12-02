@@ -27,22 +27,22 @@ def write_into_db():
 
 
 
-def split_socketmsg_into_jsonbody(message):
-    list_msg = message.split(";")
+def split_socketmsg_into_jsonbody(list_msg):
     #time_relativ = list_msg[0] - timeReference ## This line is the reason why it is not working yet
     #Does not work properly because we have str(datetime)
     '''I need to reconvert the str(datetime) into datetime without loosing information    '''
     json_body_jointState = [
             {
-                "measurement": "Btn_Masher_robot",
+                "measurement": "BtnMasherApplication_Test",
                 "tags": {
-                    "requestName": "Btn_State",
+                    "requestName": "Btn_State_Test",
                     "requestType": "GET"
                 },
                 "time":list_msg[0],
                  "fields": {
                     "Btn_name": list_msg[1],
-                    "Btn_State": list_msg[2]
+                    "Btn_State": list_msg[2],
+                    "In_Time_Interval": list_msg[3]
                             }
             }
         ]

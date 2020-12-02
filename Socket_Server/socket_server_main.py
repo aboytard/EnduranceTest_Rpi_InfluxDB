@@ -25,8 +25,8 @@ import BtnDefinition
 ## def run():
     ################# Step 0 #####################
 # Initiialize the servor - Setup the socket :
-HOST = '10.0.1.12'
-PORT = 9000
+HOST = '10.4.11.117'
+PORT = 6000
 mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     mySocket.bind((HOST, PORT))
@@ -79,11 +79,6 @@ while 1:
     # This thread is also listening to the client
     conn_client = {}  
 
-    ###########################################
-    ######### Step 1 #########################
-    # Creation of the database we want to write in in influxDB
-#    client_db = writing_influxDB_jointState.write_into_db()
-    client_db = writing_influxDB_BtnMasher_robot.write_into_db()
     ###########################################
 
     ###########################################

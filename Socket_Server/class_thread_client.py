@@ -42,9 +42,15 @@ class ThreadClient(threading.Thread):
                     time_relativ_use.time_t1 = time.time()
                 if list_msg[2]=='untouched':
                     time_relativ_use.time_t2 = time.time()
-                    time_relativ_use.compare_time()
-                #print(list_msg)
-                #writing_influxDB_BtnMasher_robot.write_data(message,self.client_db)
+                    compare = time_relativ_use.compare_time()
+                    if compare == True:
+                        list_msg.append(True)
+                        data = writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(list_msg)
+                        self.client_db.write_points(data)
+                    else:
+                        list_msg.append(False)
+                        data = writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(list_msg)
+                        self.client_db.write_points(data)
             except:
                 ## if we are not having the msg of the jointstate, it is because we are receiving the timeReference
                 #print("solve issue")

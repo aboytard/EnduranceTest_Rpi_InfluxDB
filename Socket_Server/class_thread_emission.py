@@ -12,6 +12,9 @@ import datetime
 import RPi.GPIO as GPIO
 import BtnDefinition
 
+sys.path.append('/home/ubuntu/Repo_BtnMasher_Rpi')
+import time_relativ_use
+
 
 '''Define the class that will send the BtnState coming from the BtnMasherApplication to the computer '''
 '''Normally I would just have one button and two thread running but I chose to define the two button in this class to use only one thread '''
@@ -31,10 +34,10 @@ class Thread_Send_BtnState(threading.Thread):
     def run(self):
         while 1:
             if BtnDefinition.bool_send_msg_Btn1State == True:
-                self.connexion.send(str(datetime.datetime.utcnow())+";"+self.name_Btn1+";"+self.msg)
+                self.connexion.send(str(time_relativ_use.time_t1_plus_delta_t)+";"+self.name_Btn1+";"+self.msg)
                 BtnDefinition.bool_send_msg_Btn1State = False
             if BtnDefinition.bool_send_msg_Btn2State == True:
-                self.connexion.send(str(datetime.datetime.utcnow())+";"+self.name_Btn2+";"+self.msg)
+                self.connexion.send(str(time_relativ_use.time_t1_plus_delta_t)+";"+self.name_Btn2+";"+self.msg)
                 BtnDefinition.bool_send_msg_Btn2State = False
 
                 
