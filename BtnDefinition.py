@@ -17,8 +17,8 @@ add raw input?
 PushBtn1_Port = 19
 PushBtn2_Port = 29
 
-GPIO.setup(PushBtn1_Port, GPIO.IN)
-GPIO.setup(PushBtn2_Port, GPIO.IN)
+GPIO.setup(PushBtn1_Port, GPIO.IN,pull_up_down = GPIO.PUD_UP)
+GPIO.setup(PushBtn2_Port, GPIO.IN,pull_up_down = GPIO.PUD_UP)
 
 bool_send_msg_Btn1State = False
 bool_send_msg_Btn2State = False

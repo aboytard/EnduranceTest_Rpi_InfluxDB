@@ -10,7 +10,7 @@ import socket, sys, threading
 """Create the DB and see how we want to print the data"""
 #import writing_influxDB_jointState
 import writing_influxDB_BtnMasher_robot
-import time
+import datetime
 
 ### add the time_relativ_use
 sys.path.append('/home/ubuntu/Repo_BtnMasher_Rpi')
@@ -38,19 +38,29 @@ class ThreadClient(threading.Thread):
             print message
             try :
                 list_msg = message.split(";")
+                print(list_msg)
                 if list_msg[2]=='touched':
-                    time_relativ_use.time_t1 = time.time()
+                    print("point A")
+                    time_relativ_use.time_t1 = datetime.datetime.strptime(list_msg[0],'%Y-%m-%d %H:%M:%S.%f')
+                    print("time_relativ_use.time_t1 = ", time_relativ_use.time_t1)
                 if list_msg[2]=='untouched':
-                    time_relativ_use.time_t2 = time.time()
+                    print('Point 0')
+                    time_relativ_use.time_t2 = datetime.datetime.strptime(list_msg[0],'%Y-%m-%d %H:%M:%S.%f')
+                    print('POINT 00')
                     compare = time_relativ_use.compare_time()
+                    print('POINT 000')
                     if compare == True:
+                        print("Point 1")
                         list_msg.append(True)
                         data = writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(list_msg)
-                        self.client_db.write_points(data)
+                        writing_influxDB_BtnMasher_robot.write_data(data,self.client_db)
+                        print("Good job pilz")
                     else:
+                        print("Point 2")
                         list_msg.append(False)
                         data = writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(list_msg)
-                        self.client_db.write_points(data)
+                        writing_influxDB_BtnMasher_robot.write_data(data,self.client_db)
+                        print("Sorry but issue")
             except:
                 ## if we are not having the msg of the jointstate, it is because we are receiving the timeReference
                 #print("solve issue")

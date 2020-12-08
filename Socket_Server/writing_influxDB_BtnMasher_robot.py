@@ -17,6 +17,8 @@ from dateutil.parser import parse
 '''
 creation of the DB
 '''
+
+list_msg = []
 def write_into_db():
     client=InfluxDBClient(host="localhost",port="8086")
     client.create_database('BtnMasherApplication_DB_Test') ## Always writing in the same DB for now

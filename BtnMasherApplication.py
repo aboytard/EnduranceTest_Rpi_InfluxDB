@@ -16,12 +16,13 @@ import sys
 import BtnDefinition 
 
 """Get the last BtnMasherApplication_DB and add a incremental number on it"""
-import Logger_BtnMasherApplication
-Logger_BtnMasherApplication.logger.addHandler(Logger_BtnMasherApplication.file_handler) # Define in which way and where we want to log the data 
+#import Logger_BtnMasherApplication
+#Logger_BtnMasherApplication.logger.addHandler(Logger_BtnMasherApplication.file_handler) # Define in which way and where we want to log the data 
 
 """Create the DB and see how we want to print the data"""
-import writing_influxDB
-client=writing_influxDB.write_into_db()
+sys.path.append('/home/ubuntu/Repo_BtnMasher_Rpi/Socket_Server_Rpi')
+import writing_influxDB_BtnMasher_robot
+client=writing_influxDB_BtnMasher_robot.write_into_db()
 
 ''' Import the time_relativ_use'''
 import time_relativ_use
@@ -31,10 +32,10 @@ import time_relativ_use
  
 def my_callback_Btn1(channel):                
     print "Btn1"
-    """Call a function in the writing_json_body module that adapt with data we want to write in the DB"""
-    writing_influxDB.write_data(writing_influxDB.json_body_define(BtnDefinition.PushBtn1_Port),client)
-    """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
-    Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn1_Port))
+#    """Call a function in the writing_json_body module that adapt with data we want to write in the DB"""
+#    writing_influxDB_BtnMasher_robot.write_data(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg),client)
+#    """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
+#    Logger_BtnMasherApplication.logger.info(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg))
     time_relativ_use.time_t1_plus_delta_t = datetime.datetime.utcnow()
     BtnDefinition.bool_send_msg_Btn1State = True
     
@@ -42,10 +43,10 @@ def my_callback_Btn1(channel):
     
 def my_callback_Btn2(channel): 
     print "BTN2" 
-    """Call a function in the writing_json_body module that adapt with data we want to write in the DB"""
-    writing_influxDB.write_data(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port),client)
-    """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
-    Logger_BtnMasherApplication.logger.info(writing_influxDB.json_body_define(BtnDefinition.PushBtn2_Port))
+#    """Call a function in the writing_json_body module that adapt with data we want to write in the DB"""
+#    writing_influxDB_BtnMasher_robot.write_data(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg),client)
+#    """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
+#    Logger_BtnMasherApplication.logger.info(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg))
     time_relativ_use.time_t1_plus_delta_t = datetime.datetime.utcnow()
     BtnDefinition.bool_send_msg_Btn2State = True
     
@@ -64,7 +65,7 @@ raw input ??
 
 i=0
 try:
-    sleep(300)         # wait 300 seconds  ## DEFINE THE TIME OF SIMULATION
+    sleep(6000)         # wait 300 seconds  ## DEFINE THE TIME OF SIMULATION
     print "Time's up. Finished!"  
 except KeyboardInterrupt:
     GPIO.cleanup()

@@ -26,7 +26,7 @@ import BtnDefinition
     ################# Step 0 #####################
 # Initiialize the servor - Setup the socket :
 HOST = '10.4.11.117'
-PORT = 6000
+PORT = 5003
 mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     mySocket.bind((HOST, PORT))
@@ -60,7 +60,9 @@ while 1:
     # This thread is also listening to the client
     conn_client = {}  
     th_Client = class_thread_client.ThreadClient(connexion,conn_client,client_db)
+    th_Client.setDaemon(True)
     th_E = class_thread_emission.Thread_Send_BtnState(connexion,"Btn1","Btn2")
+    th_E.setDaemon(True)
     ## The client is also writing the jointState in InfluxDb
     th_Client.start()
     th_E.start()
@@ -73,18 +75,14 @@ while 1:
     # Dialogue avec le client :
     connexion.send("You are connected. Send your message.")
     ###########################################
-    ###########################################
-    ########## Step 4 #########################
-    # Creation of a thread to send the data from the BtnMasherApplication to the computer
-    # This thread is also listening to the client
-    conn_client = {}  
+
 
     ###########################################
 
     ###########################################
     
         ###########################################
-    ######### Step 2 #########################
+    ######### Step 4#########################
     # Launch the BtnMasherApplication
     import BtnMasherApplication
     ###########################################
