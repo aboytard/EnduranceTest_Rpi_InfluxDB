@@ -22,7 +22,7 @@ import BtnDefinition
 """Create the DB and see how we want to print the data"""
 sys.path.append('/home/ubuntu/Repo_BtnMasher_Rpi/Socket_Server_Rpi')
 import writing_influxDB_BtnMasher_robot
-client=writing_influxDB_BtnMasher_robot.write_into_db()
+
 
 ''' Import the time_relativ_use'''
 import time_relativ_use
@@ -31,29 +31,21 @@ import time_relativ_use
 
  
 def my_callback_Btn1(channel):                
-    print "Btn1"
-#    """Call a function in the writing_json_body module that adapt with data we want to write in the DB"""
-#    writing_influxDB_BtnMasher_robot.write_data(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg),client)
-#    """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
-#    Logger_BtnMasherApplication.logger.info(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg))
-    time_relativ_use.time_t1_plus_delta_t = datetime.datetime.utcnow()
-    BtnDefinition.bool_send_msg_Btn1State = True
+    print "Btn1" # To see on the shell if we match with the Btn Pressing noise
+    time_relativ_use.time_t1_plus_delta_t = datetime.datetime.utcnow() # Log the time of the Btn Pressing in another module so it can be easily found
+    BtnDefinition.bool_send_msg_Btn1State = True #enable the Thread_Send_Btn_State to send the socket message
     
     
     
 def my_callback_Btn2(channel): 
     print "BTN2" 
-#    """Call a function in the writing_json_body module that adapt with data we want to write in the DB"""
-#    writing_influxDB_BtnMasher_robot.write_data(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg),client)
-#    """Call a function in the Logger_BtnMasherApplication module that adapt with data we want to write in the logfile"""
-#    Logger_BtnMasherApplication.logger.info(writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(writing_influxDB_BtnMasher_robot.list_msg))
     time_relativ_use.time_t1_plus_delta_t = datetime.datetime.utcnow()
     BtnDefinition.bool_send_msg_Btn2State = True
     
 
 
-        
-GPIO.add_event_detect(BtnDefinition.PushBtn1_Port, GPIO.BOTH, callback=my_callback_Btn1, bouncetime = 500) 
+#there is 2 second between Btn1_Pressed and Btn2_Pressed so the bouncetime can be define inferior to 1000ms
+GPIO.add_event_detect(BtnDefinition.PushBtn1_Port, GPIO.BOTH, callback=my_callback_Btn1, bouncetime = 500)  
 GPIO.add_event_detect(BtnDefinition.PushBtn2_Port, GPIO.BOTH, callback=my_callback_Btn2, bouncetime = 500)
 
 
@@ -63,9 +55,9 @@ add variable time of simulation
 raw input ??
 """
 
-i=0
+
 try:
-    sleep(300)         # wait 300 seconds  ## DEFINE THE TIME OF SIMULATION
+    sleep(6000)         # DEFINE THE TIME OF SIMULATION
     print "Time's up. Finished!"  
 except KeyboardInterrupt:
     GPIO.cleanup()

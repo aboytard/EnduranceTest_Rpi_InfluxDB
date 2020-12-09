@@ -76,30 +76,7 @@ while 1:
     connexion.send("You are connected. Send your message.")
     ###########################################
 
-
-    ###########################################
-
-    ###########################################
-    
-        ###########################################
     ######### Step 4#########################
     # Launch the BtnMasherApplication
     import BtnMasherApplication
     ###########################################
-
-
-    ###########################################
-    ######### Step 3 #########################
-    # Creation of a real-time analysor
-    
-    ###########################################
-    ######### Step 5 ##########################
-    # Creation of a thread that will write the information in a file / whatever for now
-
-
-    ###########################################
-    
-
-#
-#    th_Client.stop()
-#    th_E.stop()

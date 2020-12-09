@@ -7,10 +7,6 @@ Created on Mon Nov  9 12:49:42 2020
 """
 
 import socket, sys, threading
-"""Create the DB and see how we want to print the data"""
-#import writing_influxDB_jointState
-import writing_influxDB_BtnMasher_robot
-import datetime
 
 ### add the time_relativ_use
 sys.path.append('/home/ubuntu/Repo_BtnMasher_Rpi')
@@ -27,8 +23,7 @@ class ThreadClient(threading.Thread):
         self.client_db = client_db
         self.timeReference = ""
         self.list_msg=[]
-#        self.list_msg_touched = []
-#        self.list_msg_untouched = []
+
         
     def run(self):
         # Dialog with the client :
@@ -42,45 +37,14 @@ class ThreadClient(threading.Thread):
             print "*" + msgClient + "*"
             try :
                 self.list_msg = msgClient.split(";")
-                if self.list_msg[2]=='touched':
-                    time_relativ_use.list_msg_touched = self.list_msg
-                    print("Point11")
-#                    print(datetime.datetime.strptime(self.list_msg[0],'%Y-%m-%d %H:%M:%S.%f'))
-#                    time_relativ_use.time_t1 = datetime.datetime.strptime(str(self.list_msg[0]),'%Y-%m-%d %H:%M:%S.%f')
-#                    print("time_relativ_use.time_t1 = ", time_relativ_use.time_t1)
+                if self.list_msg[2]=='touched': # knowing in which phase we are
+                    #I am logging the whole message in order to process the time comparison during the time_interval the robot is moving from Btn1 to Btn2
+                    time_relativ_use.list_msg_touched = self.list_msg 
                 if self.list_msg[2]=='untouched':
-#                    print('Point 0')
                     time_relativ_use.list_msg_untouched = self.list_msg
-#                    time_relativ_use.time_t2 = datetime.datetime.strptime(str(self.list_msg[0]),'%Y-%m-%d %H:%M:%S.%f')
-                    print('POINT 12')
-                    time_relativ_use.compare_time()
+                    time_relativ_use.compare_time(self.client_db)# comparing the time after the socket information flow is done / the other thread are done
             except:
                 pass
-#'''            try:
-#                if compare == True:
-#                    print("Point 1")
-#                    self.list_msg.append(True)
-#                    data = writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(self.list_msg)
-#                    writing_influxDB_BtnMasher_robot.write_data(data,self.client_db)
-#                    print("Good job pilz")
-#                else:
-#                    print("Point 2")
-#                    self.list_msg.append(False)
-#                    data = writing_influxDB_BtnMasher_robot.split_socketmsg_into_jsonbody(self.list_msg)
-#                    writing_influxDB_BtnMasher_robot.write_data(data,self.client_db)
-#                    print("Sorry but issue")
-#            except:
-#                ## if we are not having the msg of the jointstate, it is because we are receiving the timeReference
-#                #print("solve issue")
-#                pass
-#'''
-            ## add if I want to deal with a time relativ
-#                print("okidoki?")
-#                print message
-#                self.timeReference = message
-#                print self.timeReference
-#                print("OKIDOKI")
-            # Make the msg followed for all the clients :
             ######################
             for cle in self.conn_client:
                 if cle != nom:      # do not send it back to the one who emit it
@@ -90,4 +54,4 @@ class ThreadClient(threading.Thread):
         self.connection.close()      # cut connexion from the server with client
         del self.conn_client[nom]        # suppress his entrance from the dictionnary
         print "Client %s disconnected." % nom
-        # Le thread se termine ici    
+        # Le thread is done here   
