@@ -30,7 +30,7 @@ show the databases:
 ```show databases```
 
 Use the databases of our choise
-```show *Name of the databases*```
+```use *Name of the databases*```
 
 Vizualise the information : Can also be seen directly in the writing_influxDB.py code
 Show the measurements:
