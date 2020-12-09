@@ -26,7 +26,7 @@ import BtnDefinition
     ################# Step 0 #####################
 # Initiialize the servor - Setup the socket :
 HOST = '10.4.11.117'
-PORT = 5005
+PORT = 5007
 mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     mySocket.bind((HOST, PORT))
